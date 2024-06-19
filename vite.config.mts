@@ -7,11 +7,11 @@ import { svgBuilder } from "./src/icons/loader";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue(), vueJsx(), svgBuilder("./src/icons/svg/")],
-  base: "./",
+  base: "/vue-admin/",
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src")
-    }
+      "@": path.resolve(__dirname, "src"),
+    },
   },
   server: {
     port: 1088,
@@ -43,12 +43,15 @@ export default defineConfig({
             return "css/[name]-[hash].css";
           }
           const imageTypes = [".png", "jpg", "jpeg", ".webp", ".gif"];
-          if (target.name && imageTypes.some(type => target.name!.endsWith(type))) {
+          if (
+            target.name &&
+            imageTypes.some((type) => target.name!.endsWith(type))
+          ) {
             return "image/[name]-[hash].[ext]";
           }
           return "assets/[name]-[hash].[ext]";
-        }
-      }
-    }
+        },
+      },
+    },
   },
-})
+});
